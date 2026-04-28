@@ -1,0 +1,16 @@
+admin
+info
+support
+contact
+help
+sales
+security
+hr
+jobs
+billing
+team
+hello
+service
+webmaster
+postmaster
+noreply

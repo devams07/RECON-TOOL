@@ -42,11 +42,6 @@ reports/
 results/
 *.json
 
-# =========================
-# WORDLISTS (optional if large)
-# =========================
-wordlists/
-*.txt
 
 # =========================
 # OS FILES
