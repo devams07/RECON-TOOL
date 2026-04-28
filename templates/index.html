@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recon Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* MAIN PAGE SPACING */
+body {
+    line-height: 1.6;
+}
+
+/* HERO SECTION (top area) */
+.hero {
+    margin-bottom: 30px;
+}
+
+/* STATS CARDS */
+.stats {
+    margin: 30px auto;
+    gap: 20px; /* space between cards */
+}
+
+/* INDIVIDUAL CARDS */
+.card {
+    margin: 25px auto;   /* 🔥 more vertical spacing */
+    padding: 25px;
+}
+
+/* HEADINGS */
+h1 {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    margin-bottom: 15px;
+}
+
+/* FORM */
+.hero form {
+    margin-top: 15px;
+}
+
+/* LIST ITEMS */
+li {
+    margin: 6px 0;
+}
+.card + .card {
+    margin-top: 30px;   /* space between stacked cards */
+}
+
+.stat-card {
+    padding: 20px;
+    margin: 10px;
+}
+
+.hero form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+
+/* INPUT */
+.hero input {
+    background: #0f172a;              /* dark background */
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    padding: 12px 15px;
+    width: 260px;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* PLACEHOLDER */
+.hero input::placeholder {
+    color: #64748b;
+}
+
+/* FOCUS EFFECT */
+.hero input:focus {
+    border-color: #22c55e;
+    box-shadow: 0 0 8px rgba(34,197,94,0.4);
+}
+
+/* BUTTON */
+.hero button {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    border: none;
+    padding: 12px 18px;
+    color: black;
+    font-weight: bold;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+.hero button:hover {
+    transform: scale(1.05);
+}
+/* FORCE DARK INPUT ALWAYS */
+.hero input {
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+/* FIX CHROME AUTOFILL (MAIN ISSUE) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #0f172a inset !important;
+    -webkit-text-fill-color: #e2e8f0 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #21243a;
+    color: #e2e8f0;
+}
+
+/* HEADER */
+h1 {
+    text-align: center;
+    padding: 20px;
+    color: #22c55e;
+}
+.hero {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.hero input {
+    width: 250px;
+}
+
+.subtitle {
+    margin: 5px 0 10px;
+    opacity: 0.7;
+}
+/* FORM */
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 260px;
+    border-radius: 6px;
+    border: none;
+}
+
+button {
+    padding: 10px 15px;
+    background: #22c55e;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #16a34a;
+}
+
+/* TABS */
+.tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 15px;
+    background: #1e293b;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab:hover {
+    background: #334155;
+}
+
+.tab.active {
+    background: #22c55e;
+    color: black;
+}
+
+/* CONTENT */
+.content {
+    display: none;
+    padding: 20px;
+}
+
+.content.active {
+    display: block;
+}
+
+/* CARD */
+.card {
+    background: #1e293b;
+    padding: 20px;
+    margin: 15px auto;
+    border-radius: 12px;
+    max-width: 850px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    overflow: hidden;
+}
+
+/* LIST FIX */
+ul {
+    padding-left: 18px;
+    margin: 5px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+li {
+    margin: 4px 0;
+    word-break: break-word;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+    text-align: left;
+}
+
+th {
+    color: #22c55e;
+    background: #0f172a;
+}
+
+tr:hover {
+    background: #334155;
+}
+
+
+
+/* TEXT WRAP */
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+.stat-card {
+    background: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: scale(1.05);
+}
+
+.stat-card h3 {
+    margin: 5px 0;
+    color: #22c55e;
+}
+
+.stat-card p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* LOADER */
+.loader {
+    display: none;
+    border: 6px solid #1e293b;
+    border-top: 6px solid #22c55e;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    animation: spin 1s linear infinite;
+}
+
+
+
+/* MOBILE */
+@media(max-width:600px){
+    input { width: 80%; }
+    .card { margin: 10px; padding: 15px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+    <h1>🔍 Recon Dashboard</h1>
+
+    <p class="subtitle">
+        Scan domains to uncover hidden infrastructure, technologies, and vulnerabilities.
+    </p>
+
+    <form method="POST">
+        <input type="text" name="domain" placeholder="Enter domain..." required>
+        <button type="submit">Scan</button>
+    </form>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <h3>🌐 IP</h3>
+        <p>{{ result.ip if result else "—" }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>📡 Ports</h3>
+        <p>{{ result.ports|length if result else 0 }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>🔍 Subdomains</h3>
+        <p>{{ result.subdomains|length if result else 0 }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>📧 Emails</h3>
+        <p>{{ result.emails|length if result else 0 }}</p>
+    </div>
+</div>
+
+<div class="loader" id="loader"></div>
+
+{% if not result %}
+
+<div class="card">
+    <h3>🚀 Welcome to Recon Pro</h3>
+    <p>Enter a domain to start scanning.</p>
+</div>
+
+<div class="card">
+    <h3>🧠 What this tool does</h3>
+    <ul>
+        <li>🌐 Finds IP & DNS records</li>
+        <li>📡 Scans open ports</li>
+        <li>🧪 Detects technologies</li>
+        <li>🔍 Finds subdomains</li>
+        <li>📂 Discovers hidden directories</li>
+        <li>📧 Collects emails & OSINT</li>
+    </ul>
+</div>
+
+{% endif %}
+
+{% if result %}
+
+<script id="recon-data" type="application/json">
+{{ result | tojson | safe }}
+</script>
+
+<!-- TABS -->
+<div class="tabs">
+    <div class="tab active" onclick="openTab(event,'overview')">Overview</div>
+    <div class="tab" onclick="openTab(event,'network')">Network</div>
+    <div class="tab" onclick="openTab(event,'web')">Web</div>
+    <div class="tab" onclick="openTab(event,'osint')">OSINT</div>
+</div>
+
+<!-- OVERVIEW -->
+<div id="overview" class="content active">
+    <div class="card">
+        <h3>🌐 IP Address</h3>
+        <p>{{ result.ip }}</p>
+    </div>
+
+    <div class="card">
+        <h3>🧪 Technologies</h3>
+        <ul>
+        {% for t in result.tech %}
+            <li>{{ t }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- NETWORK -->
+<div id="network" class="content">
+
+    <div class="card">
+        <h2>📡 Open Ports</h2>
+
+        {% if result.ports %}
+        <table>
+            <tr>
+                <th>Port</th>
+                <th>Service</th>
+                <th>Banner</th>
+            </tr>
+
+            {% for p in result.ports %}
+            <tr>
+                <td>{{ p.port }}</td>
+                <td>{{ p.service }}</td>
+                <td>{{ p.banner[:100] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No open ports</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h3>📊 Port Chart</h3>
+        <canvas id="portChart"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>🌐 DNS Records</h3>
+
+        <strong>A Records:</strong>
+        <ul>{% for a in result.dns.A %}<li>{{ a }}</li>{% endfor %}</ul>
+
+        <strong>MX Records:</strong>
+        <ul>{% for mx in result.dns.MX %}<li>{{ mx }}</li>{% endfor %}</ul>
+
+        <strong>NS Records:</strong>
+        <ul>{% for ns in result.dns.NS %}<li>{{ ns }}</li>{% endfor %}</ul>
+
+    </div>
+
+</div>
+
+<!-- WEB -->
+<div id="web" class="content">
+    <div class="card">
+        <h3>📄 Title</h3>
+        <p>{{ result.title }}</p>
+    </div>
+
+<div class="card">
+    <h3>🔍 Subdomains</h3>
+
+    <div class="scroll-box">
+        <ul>
+        {% for sub in result.subdomains or [] %}
+            <li>{{ sub }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+    <div class="card">
+        <h3>📂 Directories</h3>
+        <ul>
+        {% for d in result.directories %}
+            <li>{{ d }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- OSINT -->
+<div id="osint" class="content">
+    <div class="card">
+        <h3>📧 Emails</h3>
+
+        <div class="scroll-box">
+            <ul>
+                {% for e in result.emails or [] %}
+                    <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>   
+    </div>
+
+    <div class="card">
+        <h3>👤 GitHub</h3>
+        <ul>
+        {% for g in result.github %}
+            <li><a href="{{ g }}" target="_blank" style="color:#22c55e;">{{ g }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div style="text-align:center; margin:20px;">
+    <button onclick="downloadJSON()">⬇ Download Report</button>
+</div>
+
+{% endif %}
+
+<script>
+function openTab(evt, tabName){
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+    document.getElementById(tabName).classList.add('active');
+    evt.target.classList.add('active');
+}
+
+function showLoader(){
+    document.getElementById("loader").style.display = "block";
+}
+
+function downloadJSON(){
+    const data = JSON.parse(document.getElementById("recon-data").textContent);
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "recon_report.json";
+    a.click();
+}
+
+/* CHART FIX */
+document.addEventListener("DOMContentLoaded", () => {
+    const data = JSON.parse(document.getElementById("recon-data").textContent);
+    const ports = data.ports || [];
+
+    if (ports.length === 0) return;
+
+    const ctx = document.getElementById("portChart");
+
+    const labels = ports.map(p => p.port);
+    const values = ports.map(() => 1);
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Open Ports',
+                data: values
+            }]
+        }
+    });
+});
+</script>
+
+</body>
+</html>

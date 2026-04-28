@@ -1,0 +1,70 @@
+# =========================
+# PYTHON
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py,cover
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# =========================
+# FLASK
+# =========================
+instance/
+*.sqlite3
+*.db
+
+# =========================
+# ENV FILES (VERY IMPORTANT)
+# =========================
+.env
+.env.*
+config.py
+
+# =========================
+# LOGS
+# =========================
+*.log
+logs/
+
+# =========================
+# OUTPUT FILES (your recon results)
+# =========================
+output/
+reports/
+results/
+*.json
+
+# =========================
+# WORDLISTS (optional if large)
+# =========================
+wordlists/
+*.txt
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE / EDITOR
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# NODE (if you add frontend later)
+# =========================
+node_modules/
+dist/
+build/
